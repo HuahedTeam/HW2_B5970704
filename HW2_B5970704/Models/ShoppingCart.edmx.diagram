@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a434d15a734f41bbb51dc4b81e7aafca" Name="Diagram1">
+        <EntityTypeShape EntityType="PhoneModel.Phone" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhoneModel.AspNetUsers" Width="1.5" PointX="3.375" PointY="1" />
+        <EntityTypeShape EntityType="PhoneModel.order_details" Width="1.5" PointX="7.875" PointY="1.375" />
+        <EntityTypeShape EntityType="PhoneModel.orders" Width="1.5" PointX="5.625" PointY="1.5" />
+        <AssociationConnector Association="PhoneModel.FK_orders_ToCustomer" />
+        <AssociationConnector Association="PhoneModel.FK_order_details_ToOrder" />
+        <AssociationConnector Association="PhoneModel.FK_order_details_ToProduct" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

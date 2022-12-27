@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using HW2_B5970704.Models;
+@using HW2_B5970704.Controllers;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+<table class="table table-responsive table-hover" style="position: center">
+   
+    <tr>
+        
+        <th>id</th>
+       
+        <th>brand</th>
+  
+        <th>model</th>
+       
+        <th>price</th>
+      
+        <th>images</th>
+      
+        <th>quantity</th>
+       
+        <th>Sub Total</th>
+      
+    </tr>
+    @{decimal summary = 0; }
+     @foreach (item it in (List<item>)Session["cart"])
+     {
+         summary += (it.Phone.price.Value * it.Quantity);
+                 <tr >
+                     <td>
+                         @Html.ActionLink("x", "Delete", "ShoppingCart", new
+                    {
+                        id = it.Phone.product_id
+                    }, new { @class = "btn btn-danger" })
+                 </td>
+                 <td > @it.Phone.product_id </td >
+                 <td > @it.Phone.brand </td >
+                <td > @it.Phone.model </td >
+                 <td > @it.Phone.price </td >
+                 <td ><img src = @Url.Content("~/Content/images/" + @it.Phone.url) style = "width: 250px; height: 350px" /></td>
+                <td > @it.Quantity </td >
+                <td >@(it.Phone.price * it.Quantity) </td >
+                  </tr >
+                   }
+  
+    <tr>
+        <td align="right" colspan="7" class="text-primary">Summary </td>
+        <td>@summary</td>
+    </tr>
+    
+</table>
+ @using (Html.BeginForm("Save_Order", "ShoppingCart", FormMethod.Post))
+ {
+     if (Request.IsAuthenticated)
+     {
+         var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+         var currentUser = manager.FindById(User.Identity.GetUserId());
+
+                <div class="row">
+ <div class="text-center">
+You Information: <br />
+@currentUser.name<br />
+ @currentUser.address<br /> 
+     @currentUser.PhoneNumber<br />
+ </div>
+ </div>
+
+<div class="form-horizontal">
+ <div class="form-group">
+ <center>
+ <label class="controllabel">Please Enter Credit Card Number : </label><input type = "text" name="credit_card" id = "credit_card" class="form-control" />
+ </center>
+ </div>
+ </div>
+ <div class="row">
+ <input type = "submit" value="Place Order" class="btn btn-success pullright" />
+ </div>
+ }
+ }

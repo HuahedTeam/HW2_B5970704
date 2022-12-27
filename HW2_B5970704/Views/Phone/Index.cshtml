@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using HW2_B5970704.Models
+ <h2>Phone</h2>
+
+ <table>
+    
+    <tr>
+        
+        <th>id</th>
+     
+        <th>brand</th>
+      
+        <th>model</th>
+        
+        <th>price</th>
+       
+        <th>images</th>
+       
+    </tr>
+     @foreach (Phone p in ViewBag.listProduct)
+         {
+         <tr >
+       <td> @p.product_id </td >
+         <td> @p.brand </td >
+         <td> @p.model </td >
+         <td> @p.price </td >
+             <td> <img src=@Url.Content("~/Content/images/"+@p.url) style="width: 250px; height: 350px" /></td>
+             <td>
+                 @Html.ActionLink("Add to Cart", "AddtoCart", "ShoppingCart", new
+   {
+       id= p.product_id
+   }, new { @class = "btn btn-success" })
+         </td>
+         </tr >
+      }
+    
+</table>
+
